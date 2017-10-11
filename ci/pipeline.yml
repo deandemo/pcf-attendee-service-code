@@ -5,7 +5,6 @@ resources:
   source:
     uri: https://github.com/deandemo/pcf-attendee-service-code   #<----- REPLACE ME
     branch: concourse_deployment
-    trigger: true
 
 - name: deploy-attendee-service
   type: cf
@@ -22,6 +21,7 @@ jobs:
   public: true
   plan:
   - get: attendee-service
+    trigger: true
   - task: package
     file: attendee-service/ci/tasks/package.yml
   - put: deploy-attendee-service
