@@ -5,6 +5,7 @@ resources:
   source:
     uri: https://github.com/deandemo/pcf-attendee-service-code   #<----- REPLACE ME
     branch: concourse_deployment
+    trigger: true
 
 - name: deploy-attendee-service
   type: cf
