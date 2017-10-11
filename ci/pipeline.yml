@@ -3,17 +3,17 @@ resources:
 - name: attendee-service
   type: git
   source:
-    uri: https://github.com/YOUR_GITHUB_USER_NAME/pcf-attendee-service-code   #<----- REPLACE ME
+    uri: https://github.com/deandemo/pcf-attendee-service-code   #<----- REPLACE ME
     branch: concourse_deployment
 
 - name: deploy-attendee-service
   type: cf
   source:
-    api: YOUR_PCF_API_ENDPOINT        #<----- REPLACE ME
+    api: api.system.cumuluslabs.io
     username: {{cf-user}}
     password: {{cf-password}}
-    organization: YOUR_CI_USER_ORG    #<----- REPLACE ME
-    space: YOUR_CI_USER_SPACE         #<----- REPLACE ME
+    organization: bdeal-pal    #<----- REPLACE ME
+    space: SpaceDeveloper         #<----- REPLACE ME
     skip_cert_check: true
 
 jobs:
