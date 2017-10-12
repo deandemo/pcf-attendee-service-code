@@ -6,15 +6,15 @@ resources:
     uri: https://github.com/deandemo/pcf-attendee-service-code   #<----- REPLACE ME
     branch: concourse_deployment
 
-#- name: deploy-attendee-service-blue
-#  type: cf
-#  source:
-#    api: {{cf-api}}
-#    username: {{cf-user}}
-#    password: {{cf-password}}
-#    organization: {{cf-organization}}
-#    space: {{cf-space}}         #<----- REPLACE ME
-#    skip_cert_check: true
+- name: deploy-attendee-service
+  type: cf
+  source:
+    api: {{cf-api}}
+    username: {{cf-user}}
+    password: {{cf-password}}
+    organization: {{cf-organization}}
+    space: {{cf-space}}         #<----- REPLACE ME
+    skip_cert_check: true
 
 jobs:
 - name: build
@@ -36,18 +36,19 @@ jobs:
     params:
       PWS_APP_SUFFIX: {{cf-app-suffix}}
 
-#  - task: unit-test
-#    file: attendee-service/ci/tasks/test.yml
-#  - task: package
-#    file: attendee-service/ci/tasks/package.yml
-#  - put: deploy-attendee-service-blue
-#    params:
-#      manifest: attendee-service/manifest.yml
-#      path: package-output/attendee-service.jar
-#  - task: smoke-blue
-#    file: attendee-service/ci/tasks/smoke-test.yml
-#    params:
-#      TARGET: blue
+  - task: unit-test
+    file: attendee-service/ci/tasks/test.yml
+  - task: package
+    file: attendee-service/ci/tasks/package.yml
+
+  - put: deploy-attendee-service
+    params:
+      manifest: app-manifest-output/manifest.yml
+      path: package-output/attendee-service.jar
+
+  - task: smoke-blue
+    file: attendee-service/ci/tasks/smoke-test.yml
+
 #  - task: update-routes
 #    file: attendee-service/ci/tasks/update-routes.sh
 #    params:
