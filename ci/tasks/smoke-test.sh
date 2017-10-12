@@ -3,9 +3,9 @@
 set -e +x
 
 echo "Executing smoke tests [$TARGET]"
-
+echo "Param $1"
 prefix=$(cat ./current-app-info/next-app.txt)
-if [ -z "$PRODUCTION" ]; then
+if [ -z "$1" ]; then
     echo "Testing prod url"
     prefix="main"
 fi
