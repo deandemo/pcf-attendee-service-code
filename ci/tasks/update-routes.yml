@@ -7,5 +7,9 @@ image_resource:
     repository: pivotalservices/docker-concourse-cf-tools
     tag: "latest"
 
+inputs:
+- name: attendee-service
+- name: current-app-info
+
 run:
   path: attendee-service/ci/tasks/update-routes.sh

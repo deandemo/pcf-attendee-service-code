@@ -38,8 +38,8 @@ jobs:
 
 #  - task: unit-test
 #    file: attendee-service/ci/tasks/test.yml
-#  - task: package
-#    file: attendee-service/ci/tasks/package.yml
+  - task: package
+    file: attendee-service/ci/tasks/package.yml
 
   - put: deploy-attendee-service
     params:
@@ -49,14 +49,14 @@ jobs:
   - task: smoke-blue
     file: attendee-service/ci/tasks/smoke-test.yml
 
-#  - task: update-routes
-#    file: attendee-service/ci/tasks/update-routes.sh
-#    params:
-#      PWS_API: {{cf-api}}
-#      PWS_ORG: {{cf-organization}}
-#      PWS_USER: {{cf-user}}
-#      PWS_PWD: {{cf-password}}
-#      PWS_SPACE: {{cf-space}}
+  - task: update-routes
+    file: attendee-service/ci/tasks/update-routes.sh
+    params:
+      PWS_API: {{cf-api}}
+      PWS_ORG: {{cf-organization}}
+      PWS_USER: {{cf-user}}
+      PWS_PWD: {{cf-password}}
+      PWS_SPACE: {{cf-space}}
 #
 #  - task: smoke-green
 #    file: attendee-service/ci/tasks/smoke-test.yml
