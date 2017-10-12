@@ -4,12 +4,16 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: pivotalservices/docker-concourse-cf-tools
-    tag: "latest"
+    repository: java
+    tag: "8"
 
 inputs:
 - name: attendee-service
 - name: current-app-info
 
+outputs:
+- name: test-output
+
 run:
-  path: attendee-service/ci/tasks/update-routes.sh
+  path: attendee-service/ci/tasks/smoke-test.sh
+

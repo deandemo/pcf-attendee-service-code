@@ -2,9 +2,9 @@
 
 set -e +x
 
-echo "Executing smoke tests"
+echo "Executing smoke tests for prod"
 
-TARGET_URL="http://$(cat ./current-app-info/next-app.txt)-attendee-service-dcb.apps.cumuluslabs.io/attendees"
+TARGET_URL="http://main-attendee-service-dcb.apps.cumuluslabs.io/attendees"
 
 echo "Targeting [$TARGET_URL]"
 

@@ -61,8 +61,6 @@ jobs:
       PWS_APP_SUFFIX: {{cf-app-suffix}}
 
   - task: smoke-production
-    file: attendee-service/ci/tasks/smoke-test.yml
-    params:
-      PRODUCTION: true
+    file: attendee-service/ci/tasks/smoke-test-prod.yml
 
 
