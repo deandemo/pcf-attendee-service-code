@@ -50,7 +50,7 @@ jobs:
     file: attendee-service/ci/tasks/smoke-test.yml
 
   - task: update-routes
-    file: attendee-service/ci/tasks/update-routes.sh
+    file: attendee-service/ci/tasks/update-routes.yml
     params:
       PWS_API: {{cf-api}}
       PWS_ORG: {{cf-organization}}
