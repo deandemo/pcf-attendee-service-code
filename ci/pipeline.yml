@@ -9,11 +9,11 @@ resources:
 - name: deploy-attendee-service-blue
   type: cf
   source:
-    api: api.system.cumuluslabs.io
+    api: {{cf-api}}
     username: {{cf-user}}
     password: {{cf-password}}
-    organization: bdean-pal    #<----- REPLACE ME
-    space: sandbox         #<----- REPLACE ME
+    organization: {{cf-organization}}
+    space: {{cf-space}}         #<----- REPLACE ME
     skip_cert_check: true
 
 jobs:
