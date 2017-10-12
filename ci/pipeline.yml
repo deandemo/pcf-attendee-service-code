@@ -17,37 +17,21 @@ resources:
     skip_cert_check: true
 
 jobs:
-- name: unit-tests
-  serial: true
+- name: build
   public: true
   plan:
   - get: attendee-service
     trigger: true
   - task: unit-test
-    file: attendee-service/ci/tasks/test/yml
-
-- name: build
-  serial: true
-  public: true
-  plan:
-  - get: attendee-service
-    trigger: true
-    passed:
-      - unit-tests
+    file: attendee-service/ci/tasks/test.yml
   - task: package
     file: attendee-service/ci/tasks/package.yml
   - put: deploy-attendee-service-blue
     params:
       manifest: attendee-service/manifest.yml
       path: package-output/attendee-service.jar
-
-- name: verify-blue
-  serial: true
-  public: true
-  plan:
-  - get: attendee-service
-    trigger: true
-    passed:
-      - build
   - task: smoke-blue
-    file: attendee-service/ci/tasks/smoke-blue.yml
+    file: attendee-service/ci/tasks/smoke-test.yml
+    params:
+      TARGET: blue
+
