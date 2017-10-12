@@ -15,5 +15,5 @@ outputs:
 - name: test-output
 
 run:
-  path: attendee-service/ci/tasks/smoke-test.sh
+  path: attendee-service/ci/tasks/smoke-test-prod.sh
 

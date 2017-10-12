@@ -31,13 +31,15 @@ jobs:
       PWS_USER: {{cf-user}}
       PWS_PWD: {{cf-password}}
       PWS_SPACE: {{cf-space}}
+
   - task: prepare-app-manifest
     file: attendee-service/ci/tasks/app-manifest-prep.yml
     params:
       PWS_APP_SUFFIX: {{cf-app-suffix}}
 
-#  - task: unit-test
-#    file: attendee-service/ci/tasks/test.yml
+  - task: unit-test
+    file: attendee-service/ci/tasks/test.yml
+
   - task: package
     file: attendee-service/ci/tasks/package.yml
 
