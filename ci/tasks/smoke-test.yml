@@ -9,6 +9,7 @@ image_resource:
 
 inputs:
 - name: attendee-service
+- name: current-app-info
 
 outputs:
 - name: test-output

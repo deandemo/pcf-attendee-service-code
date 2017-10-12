@@ -36,10 +36,10 @@ jobs:
     params:
       PWS_APP_SUFFIX: {{cf-app-suffix}}
 
-  - task: unit-test
-    file: attendee-service/ci/tasks/test.yml
-  - task: package
-    file: attendee-service/ci/tasks/package.yml
+#  - task: unit-test
+#    file: attendee-service/ci/tasks/test.yml
+#  - task: package
+#    file: attendee-service/ci/tasks/package.yml
 
   - put: deploy-attendee-service
     params:
