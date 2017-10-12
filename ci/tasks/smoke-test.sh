@@ -4,7 +4,13 @@ set -e +x
 
 echo "Executing smoke tests [$TARGET]"
 
-TARGET_URL="http://$(cat ./current-app-info/next-app.txt)-attendee-service-dcb.apps.cumuluslabs.io/attendees"
+prefix=$(cat ./current-app-info/next-app.txt)
+if [ -z "$PRODUCTION" ]; then
+    echo "Testing prod url"
+    prefix="main"
+fi
+
+TARGET_URL="http://$prefix-attendee-service-dcb.apps.cumuluslabs.io/attendees"
 
 echo "Targeting [$TARGET_URL]"
 

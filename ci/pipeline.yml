@@ -59,10 +59,10 @@ jobs:
       PWS_SPACE: {{cf-space}}
       PWS_APP_DOMAIN: {{cf-app-domain}}
       PWS_APP_SUFFIX: {{cf-app-suffix}}
-#
-#  - task: smoke-green
-#    file: attendee-service/ci/tasks/smoke-test.yml
-#    params:
-#      TARGET: green
+
+  - task: smoke-production
+    file: attendee-service/ci/tasks/smoke-test.yml
+    params:
+      PRODUCTION: true
 
 
