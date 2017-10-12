@@ -57,6 +57,8 @@ jobs:
       PWS_USER: {{cf-user}}
       PWS_PWD: {{cf-password}}
       PWS_SPACE: {{cf-space}}
+      PWS_APP_DOMAIN: {{cf-app-domain}}
+      PWS_APP_SUFFIX: {{cf-app-suffix}}
 #
 #  - task: smoke-green
 #    file: attendee-service/ci/tasks/smoke-test.yml
