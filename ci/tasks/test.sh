@@ -2,7 +2,7 @@
 
 set -e +x
 
-pushd movie-service
+pushd attendee-service
   echo "Executing unit tests"
   ./mvnw clean test
 popd
