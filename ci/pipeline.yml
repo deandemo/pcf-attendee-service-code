@@ -6,15 +6,15 @@ resources:
     uri: https://github.com/deandemo/pcf-attendee-service-code   #<----- REPLACE ME
     branch: concourse_deployment
 
-- name: deploy-attendee-service-blue
-  type: cf
-  source:
-    api: {{cf-api}}
-    username: {{cf-user}}
-    password: {{cf-password}}
-    organization: {{cf-organization}}
-    space: {{cf-space}}         #<----- REPLACE ME
-    skip_cert_check: true
+#- name: deploy-attendee-service-blue
+#  type: cf
+#  source:
+#    api: {{cf-api}}
+#    username: {{cf-user}}
+#    password: {{cf-password}}
+#    organization: {{cf-organization}}
+#    space: {{cf-space}}         #<----- REPLACE ME
+#    skip_cert_check: true
 
 jobs:
 - name: build
@@ -22,16 +22,41 @@ jobs:
   plan:
   - get: attendee-service
     trigger: true
-  - task: unit-test
-    file: attendee-service/ci/tasks/test.yml
-  - task: package
-    file: attendee-service/ci/tasks/package.yml
-  - put: deploy-attendee-service-blue
+  - task: get-current-app-color
+    file: attendee-service/ci/tasks/current-app-get-info.yml
     params:
-      manifest: attendee-service/manifest.yml
-      path: package-output/attendee-service.jar
-  - task: smoke-blue
-    file: attendee-service/ci/tasks/smoke-test.yml
-    params:
-      TARGET: blue
+      PWS_API: {{cf-api}}
+      PWS_ORG: {{cf-organization}}
+      PWS_USER: {{cf-user}}
+      PWS_PWD: {{cf-password}}
+      PWS_SPACE: {{cf-space}}
+  - task: prepare-app-manifest
+    file: attendee-service/ci/tasks/app-manifest-prep.yml
+
+#  - task: unit-test
+#    file: attendee-service/ci/tasks/test.yml
+#  - task: package
+#    file: attendee-service/ci/tasks/package.yml
+#  - put: deploy-attendee-service-blue
+#    params:
+#      manifest: attendee-service/manifest.yml
+#      path: package-output/attendee-service.jar
+#  - task: smoke-blue
+#    file: attendee-service/ci/tasks/smoke-test.yml
+#    params:
+#      TARGET: blue
+#  - task: update-routes
+#    file: attendee-service/ci/tasks/update-routes.sh
+#    params:
+#      PWS_API: {{cf-api}}
+#      PWS_ORG: {{cf-organization}}
+#      PWS_USER: {{cf-user}}
+#      PWS_PWD: {{cf-password}}
+#      PWS_SPACE: {{cf-space}}
+#
+#  - task: smoke-green
+#    file: attendee-service/ci/tasks/smoke-test.yml
+#    params:
+#      TARGET: green
+
 

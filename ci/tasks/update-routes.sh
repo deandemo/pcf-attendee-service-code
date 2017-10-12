@@ -7,7 +7,7 @@ env
 
 cf api $CF_API --skip-ssl-validation
 
-cf login -u $CF_USER -p $CF_PWD -o "$CF_ORG" -s "$CF_SPACE"
+cf login -u $CF_USER -p $CF_PWD
 
 cf apps
 
@@ -22,15 +22,14 @@ export NEXT_APP_HOSTNAME=$NEXT_APP_COLOR-$CF_APP_SUFFIX
 export CURRENT_APP_COLOR=$(cat ./current-app-info/current-app.txt)
 export CURRENT_APP_HOSTNAME=$CURRENT_APP_COLOR-$CF_APP_SUFFIX
 
-echo "Mapping main app route to point to $NEXT_APP_HOSTNAME instance"
-cf map-route $NEXT_APP_HOSTNAME $CF_DOMAIN_NAME --hostname $MAIN_ROUTE_HOSTNAME
-
+echo "Mapping main app route to point to BLUE instance"
+cf map-route attendee-service-blue apps.cumuluslabs.io -n attendee-service-propanedioic-proportion
 cf routes
 
 echo "Removing previous main app route that pointed to $CURRENT_APP_HOSTNAME instance"
 
 set +e
-cf unmap-route $CURRENT_APP_HOSTNAME $CF_DOMAIN_NAME --hostname $MAIN_ROUTE_HOSTNAME
+cf unmap-route attendee-service apps.cumuluslabs.io -n attendee-service-propanedioic-proportion
 set -e
 
 echo "Routes updated"

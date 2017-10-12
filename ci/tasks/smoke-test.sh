@@ -2,11 +2,19 @@
 
 set -e +x
 
-pushd attendee-service
-  echo "Executing smoke tests [$TARGET]"
-popd
+echo "Executing smoke tests [$TARGET]"
 
-#find attendee-service/target/surefire-reports -type f -name *.txt -exec cp "{}" test-output/unit-test.txt \;
+TARGET_URL=http://attendee-service-propanedioic-proportion.apps.cumuluslabs.io/attendees
+if [ $TARGET == 'blue' ]; then
+  TARGET_URL=http://attendee-service-blue-salicaceous-bunco.apps.cumuluslabs.io/attendees
+fi;
 
-echo "Done smoke testing [$TARGET]"
-exit 0
+echo "Targeting [$TARGET_URL]"
+
+if curl --fail $TARGET_URL; then
+    echo "passed"
+    exit 0
+else
+    echo "failed"
+    exit 1
+fi;
