@@ -25,6 +25,7 @@ jobs:
   - task: get-current-app-color
     file: attendee-service/ci/tasks/current-app-get-info.yml
     params:
+      PWS_APP_SUFFIX: {{cf-app-suffix}}
       PWS_API: {{cf-api}}
       PWS_ORG: {{cf-organization}}
       PWS_USER: {{cf-user}}
@@ -32,6 +33,8 @@ jobs:
       PWS_SPACE: {{cf-space}}
   - task: prepare-app-manifest
     file: attendee-service/ci/tasks/app-manifest-prep.yml
+    params:
+      PWS_APP_SUFFIX: {{cf-app-suffix}}
 
 #  - task: unit-test
 #    file: attendee-service/ci/tasks/test.yml
